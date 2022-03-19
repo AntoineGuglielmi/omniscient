@@ -1,0 +1,16 @@
+{
+    "name": "antoineg/omniscient",
+    "autoload": {
+        "psr-4": {
+            "Antoineg\\Omniscient\\Core\\": "src/",
+            "Antoineg\\Omniscient\\App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Antoine Guglielmi",
+            "email": "contact.antoine.guglielmi@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,0 +1,301 @@
+#!/usr/bin/env php
+<?php
+
+require 'vendor/autoload.php';
+require 'src/Helpers/misc.php';
+
+use Antoineg\Omniscient\Core\CLI;
+
+$omniscientCLI = new CLI($argv);
+
+// $aliases = [
+//     'cont' => 'controller',
+//     'c' => 'controller',
+//     'middle' => 'middleware',
+//     'mid' => 'middleware'
+// ];
+// $function = $argv[1];
+// $params = array_slice($argv,2);
+
+// // ==================================================
+
+// function string($string,$fore = 'white',$back = '')
+// {
+//     $foreColors = [
+//         'black' => '0;30',
+//         'dark_grey' => '1;30',
+//         'red' => '0;31',
+//         'light_red' => '1;31',
+//         'green' => '0;32',
+//         'light_green' => '1;32',
+//         'brown' => '0;33',
+//         'yellow' => '1;33',
+//         'blue' => '0;34',
+//         'light_blue' => '1;34',
+//         'magenta' => '0;35',
+//         'light_magenta' => '1;35',
+//         'cyan' => '0;36',
+//         'light_cyan' => '1;36',
+//         'light_grey' => '0;37',
+//         'white' => '1;37'
+//     ];
+//     $backColors = [
+//         'black' => '40',
+//         'red' => '41',
+//         'green' => '42',
+//         'yellow' => '43',
+//         'blue' => '44',
+//         'magenta' => '45',
+//         'cyan' => '46',
+//         'light_grey' => '47'
+//     ];
+//     $start = "\e[";
+//     $end = 'm';
+//     $reset = "\e[0";
+    
+//     $foreColor = $foreColors[$fore] ?? $foreColors['white'];
+//     $backColor = isset($backColors[$back]) ? ':'.$backColors[$back] : '';
+//     return "$start$foreColor$backColor$end$string$start$reset$end";
+// }
+
+// function get_functions($what)
+// {
+//     $what = explode(',',$what);
+//     $output = [];
+//     $content = file_get_contents(__FILE__);
+//     $pattern = '/\/\/ Desc: (.*)\\n\/\/ Disp\\r\\nfunction (.*)\(/';
+//     preg_match_all($pattern,$content,$m);
+//     $names = $m[2];
+//     $descs = $m[1];
+//     foreach($what as $w)
+//     {
+//         $output[] = $$w;
+//     }
+//     return $output;
+// }
+
+// list($availableFunctions) = get_functions('names');
+// if(in_array($function,$availableFunctions))
+// {
+//     call_user_func_array($function,$params);
+// }
+// else
+// {
+//     $functionFromAliases = $aliases[$function] ?? false;
+//     if($functionFromAliases)
+//     {
+//         call_user_func_array($functionFromAliases,$params);
+//     }
+//     else
+//     {
+//         $stringFonction = string($function,'light_red');
+//         echo string("\nLa commande \"$stringFonction\" n'existe pas ou n'est pas disponible.\n");
+//         $stringCde = string('php omniscient aide','cyan');
+//         echo string("Lancer la commande \"$stringCde\" pour avoir la liste des commandes disponibles.\n\n");
+//     }
+// }
+
+// // ==================================================
+
+// // Desc: Affiche la liste des commandes disponibles
+// // Disp
+// function aide()
+// {
+//     list($functionsNames,$functionsDescs) = get_functions('names,descs');
+//     $maxlen = max(array_map('strlen', $functionsNames));
+//     echo "\n";
+//     for($i = 0; $i < count($functionsNames); $i++)
+//     {
+//         $functionName = string($functionsNames[$i],'light_green');
+//         $spaces = str_repeat(' ',$maxlen - strlen($functionsNames[$i]) + 2);
+//         echo "$functionName$spaces=> {$functionsDescs[$i]}\n";
+//     }
+//     echo "\n";
+// }
+
+
+
+// // Desc: ($controllerName,$actionName = null) Génère un fichier controller du nom $controllerName formaté
+// // Disp
+// function controller($controllerName,$actionName = null,$fromTerminal = null)
+// {
+//     if(is_null($actionName))
+//     {
+//         $actionName = 'index';
+//     }
+//     if(is_null($fromTerminal))
+//     {
+//         $fromTerminal = true;
+//     }
+//     elseif($fromTerminal == 'false')
+//     {
+//         $fromTerminal = false;
+//     }
+//     if(!preg_match('/(c|C)ontroller/',$controllerName))
+//     {
+//         $controllerName .= 'Controller';
+//     }
+//     $controllerName = preg_replace('/(.*)controller/','$1Controller',$controllerName);
+//     $controllerName = preg_replace_callback('/(.*)Controller/',function($m)
+//     {
+//         return ucfirst($m[1]).'Controller';
+//     },$controllerName);
+
+//     $content = <<<PHP
+// <?php
+
+// namespace Antoineg\Omniscient\App\Controllers;
+
+// use Antoineg\Omniscient\Core\Traits\ControllerTrait;
+
+// class $controllerName
+// {
+//     use ControllerTrait;
+
+//     public function before_action()
+//     {
+        
+//     }
+
+//     public function $actionName()
+//     {
+        
+//     }
+// }
+// PHP;
+
+//     $controllerFile = "app/Controllers/$controllerName.php";
+//         if(file_exists($controllerFile))
+//         {
+//             if($fromTerminal)
+//             {
+//                 echo string("Le controller $controllerName existe déjà.\n\n",'light_red');
+//             }
+//         }
+//         else
+//         {
+//             if(file_put_contents($controllerFile,$content))
+//             {
+//                 if($fromTerminal)
+//                 {
+//                     echo string("Le controller $controllerName a bien été généré.\n\n",'light_green');
+//                 }
+//             }
+//             else
+//             {
+//                 if($fromTerminal)
+//                 {
+//                     echo string("Un problème est survenu : controller non généré.\n\n",'light_red');
+//                 }
+//             }
+//         }
+// }
+
+
+
+// // Desc: ($middlewareName) Génère un fichier middleware du nom $middlewareName formaté
+// // Disp
+// function middleware($middlewareName)
+// {
+//     if(!preg_match('/(m|M)iddleware/',$middlewareName))
+//     {
+//         $middlewareName .= 'Middleware';
+//     }
+//     $middlewareName = preg_replace('/(.*)Middleware/','$1Middleware',$middlewareName);
+//     $middlewareName = preg_replace_callback('/(.*)Middleware/',function($m)
+//     {
+//         return ucfirst($m[1]).'Middleware';
+//     },$middlewareName);
+
+//     $content = <<<PHP
+// <?php
+
+// namespace Antoineg\Omniscient\Middlewares;
+
+// use Antoineg\Omniscient\Interfaces\MiddlewareInterface;
+
+// class $middlewareName implements MiddlewareInterface
+// {
+//     public function execute(\$request,&\$response)
+//     {
+        
+//     }
+// }
+// PHP;
+
+//     $MiddlewareFile = "app/Middlewares/$middlewareName.php";
+//     if(file_exists($MiddlewareFile))
+//     {
+//         echo string("Le Middleware $middlewareName existe déjà.\n\n",'light_red');
+//     }
+//     else
+//     {
+//         if(file_put_contents($MiddlewareFile,$content))
+//         {
+//             echo string("Le Middleware $middlewareName a bien été généré.\n\n",'light_green');
+//         }
+//         else
+//         {
+//             echo string("Un problème est survenu : Middleware non généré.\n\n",'light_red');
+//         }
+//     }
+// }
+
+
+
+// // Desc: ($root) Génère une arborescence sass / css à $root
+// // Disp
+// function sass($root)
+// {
+//     $styles = "$root/styles";
+//     $sass = "$styles/sass";
+//     $css = "$styles/css";
+//     $mainSass = "$sass/main.sass";
+//     $dirs = [$styles,$sass,$css];
+//     foreach($dirs as $dir)
+//     {
+//         if(!file_exists($dir))
+//         {
+//             mkdir($dir);
+//         }
+//     }
+//     if(!file_exists($mainSass))
+//     {
+//         file_put_contents($mainSass,'');
+//     }
+//     passthru("sass --watch $sass:$css --style expanded");
+// }
+
+
+
+// // Desc: ($viewName) Génère un fichier de vue $viewName.php
+// // Disp
+// function view($viewName)
+// {
+//     $viewPath = explode('/',$viewName);
+//     array_pop($viewPath);
+//     $path = "app/Views/pages/";
+//     foreach($viewPath as $dir)
+//     {
+//         $path .= "/$dir";
+//         if(!file_exists($path))
+//         {
+//             mkdir($path);
+//         }
+//     }
+
+//     if(file_put_contents("app/Views/pages/$viewName.php",'Hello, world!'))
+//     {
+//         // ...
+//     }
+// }
+
+
+
+// // Desc: ...
+// // 
+// function routes()
+// {
+//     var_dump($_SERVER);
+//     require './index.php';
+// }

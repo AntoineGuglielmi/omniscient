@@ -1,0 +1,72 @@
+.bienvenue
+    min-height: 100vh
+    width: 100%
+    padding: 0 1rem
+    color: $light
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .fond
+        position: absolute
+        z-index: 0
+        top: 0
+        left: 0
+        width: 100vw
+        height: 100vh
+        background-color: $dark
+        overflow: hidden
+
+        .rond
+            position: absolute
+            border-radius: 50%
+            top: 50%
+            left: 50%
+            transform: translate(-50%,-50%)
+
+            &.clair
+                transform: translate(20%,-70%)
+                // right: -70%
+                // top: -70%
+                background-color: $lighter2
+                height: 50vw
+                width: 50vw
+            &.fonce
+                transform: translate(-80%,-10%)
+                background-color: darken($dark,20%)
+                height: 3000px
+                width: 3000px
+    
+    .flou
+        position: absolute
+        z-index: 1
+        top: 0
+        left: 0
+        width: 100vw
+        height: 100vh
+        background-color: rgba(0,0,0,0.00001)
+        -webkit-backdrop-filter: blur(200px)
+        backdrop-filter: blur(200px)
+    
+    .bienvenue__content
+        position: relative
+        z-index: 2
+        width: 100%
+        max-width: 900px
+        box-shadow: 0 0 1rem 0 rgba($dark,1)
+        padding: 2rem
+        border-left: 1px solid $light
+
+        header
+            margin-bottom: 3rem
+
+            h1
+                font-size: 4rem
+                font-weight: 100
+                line-height: 1
+        
+        p
+            code
+                color: $code
+                font-weight: 700
