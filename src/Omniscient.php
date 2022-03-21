@@ -105,11 +105,11 @@ class Omniscient
 
     public function set_route($method,$uri,$pack)
     {
-        if($this->currentRouteType === 'api')
+        if($this->routeDefinition->currentRouteType === 'api')
         {
             $uri = "/api$uri";
         }
-        $this->routes[$this->currentRouteType][$method][$uri] = $pack;
+        $this->routes[$this->routeDefinition->currentRouteType][$method][$uri] = $pack;
     }
 
     public function exception($e)
