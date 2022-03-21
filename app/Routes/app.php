@@ -1,5 +1,5 @@
 <?php
 
-// $app->get('/')
-//     ->callback(['HelloWorldController::hello_world_action'])
-//     /* ->name('hello_world') */;
+$app->get('/costs/rand')
+    ->callback(['BackController::insert_random_cost'])
+    /* ->name('hello_world') */;
