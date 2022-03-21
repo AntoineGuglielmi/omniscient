@@ -139,4 +139,9 @@ Trait ControllerTrait
         }
         $this->$nickname = new $modelClass($this->request->omniscient);
     }
+
+    public function api($data)
+    {
+        echo json_encode($data);
+    }
 }
