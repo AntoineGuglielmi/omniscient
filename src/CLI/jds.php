@@ -25,15 +25,18 @@ class jds
             }
         }
 
-        if($action === 'truncate')
+        switch($action)
         {
-            $tableData = <<<JSON
+            case 'truncate':
+            case 'create':
+                $tableData = <<<JSON
 {
     "liid": 0,
     "data": []
 }
 JSON;
-        file_put_contents($this->cli::APP_PATH.'JDS/'.$table.'.json',$tableData);
+                file_put_contents($this->cli::APP_PATH.'JDS/'.$table.'.json',$tableData);
+                break;
         }
     }
     
