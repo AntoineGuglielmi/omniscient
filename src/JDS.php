@@ -43,10 +43,6 @@ class JDS
 
     private function params($d_params,$u_params)
     {
-        $d_params = [
-            'w' => function(){ return true; },
-            's' => function(){ return; }
-        ];
         $params = array_replace_recursive($d_params,$u_params);
         return (object) $params;
     }
