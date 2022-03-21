@@ -289,11 +289,15 @@ class JDS
 
     function getMaxInTable($table,$field)
     {
-        $ordres = select([
+        $fields = $this->select([
             't' => $table,
             'c' => $field
         ]);
-        return array_reduce($ordres, function($a, $b){
+        if(empty($fields))
+        {
+            return 0;
+        }
+        return array_reduce($fields, function($a, $b){
             return $a ? ($a->ordre > $b->ordre ? $a : $b) : $b;
         })->ordre;
     }
@@ -302,11 +306,15 @@ class JDS
 
     function getMinInTable($table,$field)
     {
-        $ordres = select([
+        $fields = $this->select([
             't' => $table,
             'c' => $field
         ]);
-        return array_reduce($ordres, function($a, $b){
+        if(empty($fields))
+        {
+            return 0;
+        }
+        return array_reduce($fields, function($a, $b){
             return $a ? ($a->ordre < $b->ordre ? $a : $b) : $b;
         })->ordre;
     }
