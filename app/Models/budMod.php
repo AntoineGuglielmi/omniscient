@@ -9,10 +9,12 @@ class budMod
 
     use ModelTrait;
 
+    private $table = 'budgets';
+
     public function get_budgets()
     {
       return $this->jds->select([
-        't' => 'budgets'
+        't' => $this->table
       ]);
     }
 
@@ -24,7 +26,7 @@ class budMod
     public function delete_budget($id = null)
     {
       $this->jds->delete([
-        't' => 'budgets',
+        't' => $this->table,
         'w' => function($b) use($id)
         {
           return $b->id === $id;
@@ -35,7 +37,7 @@ class budMod
     public function update_budget($id = null)
     {
       $this->jds->update([
-        't' => 'budgets',
+        't' => $this->table,
         's' => [
           'name' => 'Plooouuup'
         ],
