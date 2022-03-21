@@ -17,16 +17,12 @@ class HelloWorldController
 
     public function hello_world_action()
     {
-        // $this->model('helloworld');
-        // $data = [
-        //     'foo' => 'bar'
-        // ];
-        // $this->view('hello-world/hello_world_action',$data);
-        // $this->render('default');
         $this->model('budMod');
-        // echo '<pre>';
-        // var_dump($this->budMod);
-        // echo '</pre>';
+        $budget = new \stdClass();
+        $budget->name = 'ploup';
+        $this->budMod->add_budget($budget);
+        // $this->budMod->delete_budget(3);
+        $this->budMod->update_budget(7);
         $budgets = $this->budMod->get_budgets();
         echo json_encode($budgets);
     }

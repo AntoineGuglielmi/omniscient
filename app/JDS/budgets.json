@@ -1,12 +1,1 @@
-{
-  "liid": 0,
-  "data": [
-    {
-      "id": 1,
-      "name": "Prélèvements",
-      "saving": false,
-      "limit": 0,
-      "flux": "Débit"
-    }
-  ]
-}
+{"liid":8,"data":[{"id":1,"name":"Pr\u00e9l\u00e8vements","saving":false,"limit":0,"flux":"D\u00e9bit"},{"name":"ploup","id":4,"created_at":1647822137},{"name":"Plooouuup","id":5,"created_at":1647822137},{"name":"ploup","id":6,"created_at":1647822138},{"name":"Plooouuup","id":7,"created_at":1647822161},{"name":"ploup","id":8,"created_at":1647822298}]}

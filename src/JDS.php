@@ -41,6 +41,18 @@ class JDS
 
 
 
+    private function params($d_params,$u_params)
+    {
+        $d_params = [
+            'w' => function(){ return true; },
+            's' => function(){ return; }
+        ];
+        $params = array_replace_recursive($d_params,$u_params);
+        return (object) $params;
+    }
+
+
+
     private function result($data)
     {
         return [
@@ -75,16 +87,14 @@ class JDS
     {
         $output = [];
         
-        $d_params = [
+        $params = $this->params([
             'c' => '*',
             'w' => function(){ return true; },
             'm' => function(){ return; },
             'o' => null,
             'l' => null,
             'i' => 'stdClass'
-        ];
-        $params = array_replace_recursive($d_params,$u_params);
-        $params = (object) $params;
+        ],$u_params);
 
         if($params->c !== '*')
         {
@@ -188,6 +198,95 @@ class JDS
 
         $output = array_values($output);
         return $output;
+    }
+
+
+
+    /**
+     * Insert l'enregistrement $record dans la table $dbDotTable.
+     * L'enregistrement DOIT AVOIR un champ 'id'
+     *
+     * @param  string $dbDotTable La table dans laquelle insérer l'enregistrement, au format 'database.table' ou 'database/table'
+     * @param  object $record L'enregistrement à insérer dans la table
+     * @return void
+     */
+    public function insert($table,$object)
+    {
+        list($data,$liid) = $this->gtd($table,'data,liid');
+        $liid++;
+        $object->id = $liid;
+        $object->created_at = time();
+        $data[] = $object;
+        $this->majtd($table,'data,liid',$data,$liid);
+    }
+
+
+
+    /**
+     * Permet de supprimer un ou plusieurs enregistrements d'une table.  
+     * Prends en paramètre un tableau :
+     * - 't' : la table depuis laquelle supprimer l'enregistrement, au format 'database.table' ou 'database/table'
+     * - 'w' : une fonction permettant de filtrer les enregistrements. La fonction prend en paramètre chaque enregistrement : si la fonction retourne ***true***, l'enregistrement sera supprimer, sinon il sera ignoré
+     *
+     * @param  [string,function] $u_params Voir description
+     */
+    public function delete($u_params)
+    {
+        $params = $this->params([
+            'w' => function(){ return false; }
+        ],$u_params);
+
+        $table = $params->t;
+        list($before) = $this->gtd($table,'data');
+        $after = array_filter($before,function($item) use($params)
+        {
+            return !call_user_func($params->w,$item);
+        });
+        $after = array_values($after);
+        $this->majtd($table,'data',$after);
+    }
+
+
+
+    /**
+     * Permet de modifier un ou plusieurs enregistrements d'une table.  
+     * Prends en paramètre un tableau :
+     * - 't' : la table dans laquelle modifier l'enregistrement, au format 'database.table' ou 'database/table'
+     * - 'w' : une fonction permettant de filtrer les enregistrements. La fonction prend en paramètre chaque enregistrement : si la fonction retourne ***true***, l'enregistrement sera modifier, sinon il sera ignoré
+     * - 's' : modificateur de l'enregistrement. Peut être  un tableau de paires ***champ*** => ***valeur*** ou une fonction prenant en paramètre chaque enregistrement
+     *
+     * @param  mixed $u_params
+     */
+    public function update($u_params = [])
+    {
+        $params = $this->params([
+            'w' => function(){ return true; },
+            's' => function(){ return; }
+        ],$u_params);
+        
+        $table = $params->t;
+
+        list($tableRecords) = $this->gtd($table,'data');
+        array_walk($tableRecords,function(&$item) use($params)
+        {
+            $sType = gettype($params->s);
+            if(call_user_func($params->w,$item))
+            {
+                switch($sType)
+                {
+                    case 'object':
+                        call_user_func($params->s,$item);
+                        break;
+                    case 'array':
+                        foreach($params->s as $k => $v)
+                        {
+                            $item->$k = $v;
+                        }
+                        break;
+                }
+            }
+        });
+        $this->majtd($table,'data',$tableRecords);
     }
 
 
