@@ -20,7 +20,7 @@ class aide
             $functionName = $this->string($function,'light_green');
             $spaces = str_repeat(' ',$maxlen - strlen($function) + $this->cli::SPACES);
             $descSpaces = str_repeat(' ',$maxlen + $this->cli::SPACES + 3);
-            $functionClass = $this->cli::CLI_NAMESPACE . $function;
+            $functionClass = $this->cli::CLI_NAMESPACE . '\\' . $function;
             $functionClass = new $functionClass($this->cli);
             $functionDesc = $functionClass->desc();
             $functionDesc = str_split($functionDesc,100);

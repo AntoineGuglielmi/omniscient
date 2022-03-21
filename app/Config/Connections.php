@@ -4,3 +4,5 @@
 //     ->user('root')
 //     ->pass('')
 //     ->name('mysql1');
+
+$connection->jds()->name('jds');

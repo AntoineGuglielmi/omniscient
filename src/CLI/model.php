@@ -44,7 +44,7 @@ PHP;
 
 
     
-        $modelFile = realpath($this->cli::MODELS_DIR) . "\\$model.php";
+        $modelFile = realpath($this->cli::MODELS_DIR) . "/$model.php";
         if(!file_exists($modelFile))
         {
             if(file_put_contents($modelFile,$content))

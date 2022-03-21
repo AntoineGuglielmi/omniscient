@@ -23,7 +23,7 @@ class CLI
     public const SPACES = 2;
     public const ROOT = __DIR__ . '\\..\\';
     public const CLI_DIR = __DIR__ . '\\..\\src\\CLI';
-    public const CLI_NAMESPACE = '\\..\\Antoineg\\Omniscient\\Core\\CLI';
+    public const CLI_NAMESPACE = 'Antoineg\\Omniscient\\Core\\CLI';
     public const CONTROLLERS_DIR = __DIR__ . '\\..\\app\\Controllers';
     public const MIDDLEWARES_DIR = __DIR__ . '\\..\\app\\Middlewares';
     public const MODELS_DIR = __DIR__ . '\\..\\app\\Models';

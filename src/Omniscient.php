@@ -55,8 +55,8 @@ class Omniscient
     {
         $this->set_server();
         $omniscient = $this;
-        require 'Helpers\misc.php';
-        require 'Helpers\router.php';
+        require 'Helpers/misc.php';
+        require 'Helpers/router.php';
         $this->config = new Config($this);
         $this->request = new Request($this);
         $this->response = new Response($this);
@@ -136,6 +136,12 @@ class Omniscient
     private function mysql($dsn = null)
     {
         $database = new Database($this,'mysql',$dsn);
+        return $database;
+    }
+
+    private function jds()
+    {
+        $database = new Database($this,'jds',null);
         return $database;
     }
 }

@@ -3,6 +3,7 @@
 namespace Antoineg\Omniscient\Core;
 
 use \PDO;
+use Antoineg\Omniscient\Core\JDS;
 use Antoineg\Omniscient\Core\Exceptions\DatabaseConnectionException;
 use \Exception;
 
@@ -37,6 +38,10 @@ class Database
                 {
                     throw new DatabaseConnectionException($this->type,$this->dsn);
                 }
+                break;
+            
+            case 'jds':
+                $connection = new JDS();
                 break;
             // case 'pgsql':
             //     try

@@ -39,7 +39,7 @@ Trait ModelTrait
         }
         // try
         // {
-            $this->connection = $this->omniscient->singletons->get_singleton($connectionName);
+            return $this->connection = $this->omniscient->singletons->get_singleton($connectionName);
             return $this;
         // }
         // catch(\Exception $e)

@@ -1,0 +1,12 @@
+{
+  "liid": 0,
+  "data": [
+    {
+      "id": 1,
+      "name": "Prélèvements",
+      "saving": false,
+      "limit": 0,
+      "flux": "Débit"
+    }
+  ]
+}
