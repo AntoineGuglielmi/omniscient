@@ -4,14 +4,14 @@ namespace Antoineg\Omniscient\App\Models;
 
 use Antoineg\Omniscient\Core\Traits\ModelTrait;
 
-class budMod
+class budgetsModel
 {
 
     use ModelTrait;
 
     private $table = 'budgets';
 
-    public function get_budgets()
+    public function get()
     {
       return $this->jds->select([
         't' => $this->table

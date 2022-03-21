@@ -15,16 +15,26 @@ class HelloWorldController
         header('Content-Type: application/json');
     }
 
-    public function hello_world_action()
+    public function hello_world_action($table)
     {
-        $this->model('budMod');
-        $budget = new \stdClass();
-        $budget->name = 'ploup';
-        $this->budMod->add_budget($budget);
+        $modelName = $table.'Model';
+        $this->model($modelName);
+
+        // $budget = new \stdClass();
+        // $budget->name = 'Prélèvements';
+        // $budget->saving = false;
+        // $budget->limit = 0;
+        // $budget->flux = 'Débit';
+        // $budget->sortDepenses = 'amount:desc';
+        // $budget->ordre = $this->budMod->jds->getMaxInTable('budgets','ordre') + 1;
+        // $this->budMod->add_budget($budget);
+
         // $this->budMod->delete_budget(3);
-        $this->budMod->update_budget(7);
-        $budgets = $this->budMod->get_budgets();
-        echo json_encode($budgets);
+
+        // $this->budMod->update_budget(7);
+
+        $result = $this->$modelName->get();
+        $this->api($result);
     }
     
 }
