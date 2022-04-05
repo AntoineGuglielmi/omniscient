@@ -17,9 +17,10 @@ class HelloWorldController
 
     public function debug()
     {
-        echo '<pre>';
-        var_dump($this);
-        echo '</pre>';
+        // echo '<pre>';
+        // var_dump($this);
+        // echo '</pre>';
+        $this->api($this);
     }
     
 }
