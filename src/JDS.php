@@ -297,9 +297,9 @@ class JDS
         {
             return 0;
         }
-        return array_reduce($fields, function($a, $b){
-            return $a ? ($a->ordre > $b->ordre ? $a : $b) : $b;
-        })->ordre;
+        return array_reduce($fields, function($a, $b) use($field){
+            return $a ? ($a->$field > $b->$field ? $a : $b) : $b;
+        })->$field;
     }
 
 

@@ -112,4 +112,179 @@ class budgetsModel
       ]);
     }
 
+    public function get_all()
+    {
+      return $this->jds->select([
+        't' => $this->table,
+        'o' => ['order:asc'],
+        'm' => function($b)
+        {
+          $b->costs = $this->jds->select([
+            't' => 'costs',
+            'w' => function($c) use($b)
+            {
+              return (int)$c->budgets_id === (int)$b->id;
+            }
+          ]);
+        }
+      ]);
+    }
+
+    public function get_by_id($id)
+    {
+      return $this->jds->select([
+        't' => $this->table,
+        'o' => ['order:asc'],
+        'm' => function($b)
+        {
+          $b->costs = $this->jds->select([
+            't' => 'costs',
+            'w' => function($c) use($b)
+            {
+              return (int)$c->budgets_id === (int)$b->id;
+            }
+          ]);
+        },
+        'w' => function($b) use($id)
+        {
+          return (int)$b->id === (int)$id;
+        }
+      ])[0];
+    }
+
+    public function deleteById($budgetId)
+    {
+      $this->jds->delete([
+        't' => $this->table,
+        'w' => function($b) use($budgetId)
+        {
+          return (int)$b->id === (int)$budgetId;
+        }
+      ]);
+    }
+
+
+
+    public function add()
+    {
+      $budget = new \stdClass();
+      $sort_costs = $this->jds->select([
+        't' => 'config',
+        'w' => function($c)
+        {
+          return $c->name === 'budget_default_costs_sorting';
+        }
+      ])[0]->value;
+      $order = $this->jds->getMaxInTable('budgets','order') + 1;
+      foreach($_POST as $k => $v)
+      {
+        $budget->$k = $v;
+      }
+      $budget->sort_costs = $sort_costs;
+      $budget->order = $order;
+      $this->jds->insert($this->table,$budget);
+    }
+
+
+
+    public function update($budgetId)
+    {
+      if(isset($_POST['direction']))
+      {
+        $this->move($budgetId);
+        return;
+      }
+      $this->jds->update([
+        't' => $this->table,
+        'w' => function($b) use($budgetId)
+        {
+          return (int)$b->id === (int)$budgetId;
+        },
+        's' => function($b)
+        {
+          foreach($_POST as $k => $v)
+          {
+            $b->$k = $v;
+          }
+        }
+      ]);
+    }
+
+
+
+    public function move($budgetId)
+    {
+      $direction = $_POST['direction'];
+
+      $budget = $this->jds->select([
+        't' => $this->table,
+        'w' => function($b) use($budgetId)
+        {
+          return $b->id === $budgetId;
+        }
+      ])[0];
+
+      $maxOrdre = $this->jds->getMaxInTable('budgets','order');
+      
+      $budgetCurrentOrder = (int)$budget->order;
+
+      if($direction === 'up' && $budgetCurrentOrder === 1
+        || $direction === 'down' && (int)$budgetCurrentOrder === (int)$maxOrdre)
+      {
+        return;
+      }
+      
+      switch($direction)
+      {
+        case 'up';
+          // Update sibling budget
+          $this->jds->update([
+            't' => 'budgets',
+            'w' => function($b) use($budgetCurrentOrder)
+            {
+              return $b->order === $budgetCurrentOrder - 1;
+            },
+            's' => [
+              'order' => $budgetCurrentOrder
+            ]
+          ]);
+          // Update target budget
+          $this->jds->update([
+            't' => 'budgets',
+            'w' => function($b) use($budgetId,$budgetCurrentOrder)
+            {
+              return $b->id === (int)$budgetId;
+            },
+            's' => [
+              'order' => $budgetCurrentOrder - 1
+            ]
+          ]);
+          break;
+        case 'down';
+          // Update sibling budget
+          $this->jds->update([
+            't' => 'budgets',
+            'w' => function($b) use($budgetCurrentOrder)
+            {
+              return $b->order === $budgetCurrentOrder + 1;
+            },
+            's' => [
+              'order' => $budgetCurrentOrder
+            ]
+          ]);
+          // Update target budget
+          $this->jds->update([
+            't' => 'budgets',
+            'w' => function($b) use($budgetId,$budgetCurrentOrder)
+            {
+              return $b->id === (int)$budgetId;
+            },
+            's' => [
+              'order' => $budgetCurrentOrder + 1
+            ]
+          ]);
+          break;
+      }
+    }
+
 }

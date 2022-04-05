@@ -1,10 +1,20 @@
 {
-    "liid": 1,
+    "liid": 3,
     "data": [
         {
             "id": 1,
             "name": "salary_day",
             "value": 28
+        },
+        {
+            "id": 2,
+            "name": "exploded_emoticon",
+            "value": "💀"
+        },
+        {
+            "id": 3,
+            "name": "budget_default_costs_sorting",
+            "value": "amount:desc"
         }
     ]
 }

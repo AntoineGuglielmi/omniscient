@@ -24,4 +24,16 @@ class RouteDefinition
         return $route;
     }
 
+    public function delete($uri)
+    {
+        $route = new Route($this->omniscient,'delete',$uri);
+        return $route;
+    }
+
+    public function put($uri)
+    {
+        $route = new Route($this->omniscient,'put',$uri);
+        return $route;
+    }
+
 }

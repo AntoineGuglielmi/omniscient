@@ -32,6 +32,11 @@ Trait ControllerTrait
         return strtolower($this->request->request_method) === 'post';
     }
 
+    private function delete()
+    {
+        return strtolower($this->request->request_method) === 'delete';
+    }
+
     private function put()
     {
         return strtolower($this->request->request_method) === 'put';

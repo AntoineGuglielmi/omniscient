@@ -123,16 +123,19 @@ class Router
         {
             foreach($typeRoutes as $method => $methodRoutes)
             {
-                foreach($methodRoutes as $routeUri => $routePack)
+                if($method === $this->request_method)
                 {
-                    $routePattern = preg_replace('/\{([^\/]*)\}/','(.*)',$routeUri);
-                    $routePattern = "#^$routePattern$#";
-                    if(preg_match($routePattern,$this->request_uri,$m))
+                    foreach($methodRoutes as $routeUri => $routePack)
                     {
-                        $this->response->set('callback',$routePack['callback']);
-                        $this->response->set('params',$this->secure(array_slice($m,1)));
-                        $this->response->set('middlewares',$routePack['middlewares']);
-                        break 3;
+                        $routePattern = preg_replace('/\{([^\/]*)\}/','(.*)',$routeUri);
+                        $routePattern = "#^$routePattern$#";
+                        if(preg_match($routePattern,$this->request_uri,$m))
+                        {
+                            $this->response->set('callback',$routePack['callback']);
+                            $this->response->set('params',$this->secure(array_slice($m,1)));
+                            $this->response->set('middlewares',$routePack['middlewares']);
+                            break 3;
+                        }
                     }
                 }
             }

@@ -4,7 +4,7 @@ namespace Antoineg\Omniscient\App\Controllers;
 
 use Antoineg\Omniscient\Core\Traits\ControllerTrait;
 
-class HelloWorldController
+class ConfigsController
 {
 
     use ControllerTrait;
@@ -13,13 +13,13 @@ class HelloWorldController
     {
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
+        $this->model('configsModel','conMod');
     }
 
-    public function debug()
+    public function get_all()
     {
-        echo '<pre>';
-        var_dump($this);
-        echo '</pre>';
+        $configs = $this->conMod->get_all();
+        $this->api($configs);
     }
     
 }
