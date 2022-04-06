@@ -38,17 +38,23 @@
 // $api->get('/budgets/([0-9]+)')
 //     ->callback(['BudgetsController::get_by_id']);
 
-$api->get('/([a-z\-]+)')
-    ->callback(['ApiController::get_all']);
+// $api->get('/([a-z\-]+)')
+//     ->callback(['ApiController::get_all']);
 
-$api->get('/budgets/([0-9\-]+)/costs')
-    ->callback(['CostsController::get_all_by_budgetId']);
+// $api->get('/budgets/([0-9\-]+)/costs')
+//     ->callback(['CostsController::get_all_by_budgetId']);
 
-$api->post('/budgets/([0-9]+)')
-    ->callback(['BudgetsController::update']);
+// $api->post('/budgets/([0-9]+)')
+//     ->callback(['BudgetsController::update']);
 
-$api->post('/budgets')
-    ->callback(['BudgetsController::add']);
+// $api->post('/budgets')
+//     ->callback(['BudgetsController::add']);
 
-$api->delete('/budgets/([0-9]+)')
-    ->callback(['BudgetsController::deleteById']);
+// $api->delete('/budgets/([0-9]+)')
+//     ->callback(['BudgetsController::deleteById']);
+
+$api->get('/budgets')
+    ->callback(['BudgetsController::get_budgets']);
+
+$api->get('/budgets/([0-9]+)')
+    ->callback(['BudgetsController::get_budgets']);
