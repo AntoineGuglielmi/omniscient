@@ -11,7 +11,7 @@ class CostsController
 
     public function before_action()
     {
-        header('Access-Control-Allow-Origin: *');
+        // header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
         $this->model('costsModel','cosMod');
     }
