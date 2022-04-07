@@ -61,3 +61,6 @@ $api->get('/budgets/([0-9]+)')
 
 $api->get('/config')
     ->callback(['ConfigsController::get_all']);
+
+$api->get('/nav-links')
+    ->callback(['NavLinksController::get_all']);
