@@ -18,7 +18,7 @@ class NavLinksController
 
     public function get_all()
     {
-        $navLinks = $this->conMod->get_all();
+        $navLinks = $this->navMod->get_all();
         $this->api($navLinks);
     }
     
