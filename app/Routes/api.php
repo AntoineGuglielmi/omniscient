@@ -64,3 +64,8 @@ $api->get('/config')
 
 $api->get('/nav-links')
     ->callback(['NavLinksController::get_all']);
+
+
+
+$api->delete('/budgets/([0-9]+)')
+    ->callback(['BudgetsController::delete_budget']);
