@@ -58,3 +58,6 @@ $api->get('/budgets')
 
 $api->get('/budgets/([0-9]+)')
     ->callback(['BudgetsController::get_budgets']);
+
+$api->get('/config')
+    ->callback(['ConfigsController::get_all']);
