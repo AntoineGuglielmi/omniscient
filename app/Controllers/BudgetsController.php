@@ -44,12 +44,26 @@ class BudgetsController
     public function delete_budget($budgetId)
     {
         $this->budMod->jds->delete([
+            't' => 'costs',
+            'w' => function($c) use($budgetId)
+            {
+                return (int)$c->budgets_id === (int)$budgetId;
+            }
+        ]);
+        $this->budMod->jds->delete([
             't' => 'budgets',
             'w' => function($b) use($budgetId)
             {
                 return (int)$b->id === (int)$budgetId;
             }
         ]);
+    }
+
+    public function update_budget($id)
+    {
+        echo '<pre>';
+        var_dump(file_get_contents('php://input'));
+        echo '</pre>';
     }
     
 }
