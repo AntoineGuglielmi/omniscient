@@ -61,8 +61,9 @@ class BudgetsController
 
     public function update_budget($id)
     {
+        parse_str(file_get_contents('php://input'), $_PUT);
         echo '<pre>';
-        var_dump(file_get_contents('php://input'));
+        var_dump($_PUT);
         echo '</pre>';
     }
     
