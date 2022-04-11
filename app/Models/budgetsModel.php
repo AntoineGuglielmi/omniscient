@@ -187,7 +187,7 @@ class budgetsModel
 
 
 
-    public function update($budgetId)
+    public function update_old($budgetId)
     {
       if(isset($_POST['direction']))
       {
@@ -212,9 +212,34 @@ class budgetsModel
 
 
 
-    public function move($budgetId)
+    public function update($budgetId, $putData)
     {
-      $direction = $_POST['direction'];
+      if(isset($putData['direction']))
+      {
+        $this->move($budgetId, $putData);
+        return;
+      }
+      $this->jds->update([
+        't' => $this->table,
+        'w' => function($b) use($budgetId)
+        {
+          return (int)$b->id === (int)$budgetId;
+        },
+        's' => function($b)
+        {
+          foreach($putData as $k => $v)
+          {
+            $b->$k = $v;
+          }
+        }
+      ]);
+    }
+
+
+
+    public function move($budgetId, $putData)
+    {
+      $direction = $putData['direction'];
 
       $budget = $this->jds->select([
         't' => $this->table,
