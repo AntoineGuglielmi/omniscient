@@ -63,7 +63,7 @@ class BudgetsController
     {
         $putData = json_decode(file_get_contents('php://input'));
         $id = (int) $id;
-        $this->budMod->update($id,$putData);
+        $this->budMod->update($id,(array)$putData);
     }
     
 }
