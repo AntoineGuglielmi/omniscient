@@ -62,8 +62,8 @@ class BudgetsController
     public function update_budget($id)
     {
         $putData = json_decode(file_get_contents('php://input'));
-        $budgetId = (int) $budgetId;
-        $this->budMod->update($budgetId,$putData);
+        $id = (int) $id;
+        $this->budMod->update($id,$putData);
     }
     
 }
