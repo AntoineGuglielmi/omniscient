@@ -225,7 +225,7 @@ class budgetsModel
         {
           return (int)$b->id === (int)$budgetId;
         },
-        's' => function($b)
+        's' => function($b) use($putData)
         {
           foreach($putData as $k => $v)
           {
