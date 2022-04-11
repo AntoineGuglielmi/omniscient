@@ -214,6 +214,10 @@ class budgetsModel
 
     public function update($budgetId, $putData)
     {
+      echo '<pre>';
+      var_dump($putData);
+      echo '</pre>';
+      return;
       if(isset($putData['direction']))
       {
         $this->move($budgetId, $putData);
@@ -239,9 +243,6 @@ class budgetsModel
 
     public function move($budgetId, $putData)
     {
-      echo '<pre>';
-      var_dump($putData);
-      echo '</pre>';
       $direction = $putData['direction'];
 
       $budget = $this->jds->select([
