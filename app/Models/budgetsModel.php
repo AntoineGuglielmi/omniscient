@@ -165,7 +165,7 @@ class budgetsModel
 
 
 
-    public function add()
+    public function create_budget()
     {
       $budget = new \stdClass();
       $sort_costs = $this->jds->select([

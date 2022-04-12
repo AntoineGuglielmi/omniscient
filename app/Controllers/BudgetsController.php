@@ -68,9 +68,7 @@ class BudgetsController
 
     public function create_budgets()
     {
-        echo '<pre>';
-        var_dump($_POST);
-        echo '</pre>';
+        $this->budMod->create_budget();
     }
     
 }
