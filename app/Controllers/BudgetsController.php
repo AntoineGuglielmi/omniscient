@@ -65,5 +65,12 @@ class BudgetsController
         $id = (int) $id;
         $this->budMod->update($id,(array)$putData);
     }
+
+    public function create_budgets()
+    {
+        echo '<pre>';
+        var_dump($_POST);
+        echo '</pre>';
+    }
     
 }

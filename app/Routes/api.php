@@ -74,3 +74,8 @@ $api->delete('/budgets/([0-9]+)')
 
 $api->put('/budgets/([0-9]+)')
     ->callback(['BudgetsController::update_budget']);
+
+
+
+$api->post('/budgets')
+    ->callback(['BudgetsController::create_budgets']);
