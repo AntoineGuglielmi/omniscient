@@ -52,6 +52,9 @@ class costsModel
     public function create_cost()
     {
       $cost = new \stdClass();
+      echo '<pre>';
+      var_dump($_POST);
+      echo '</pre>';
       foreach($_POST as $k => $v)
       {
         $cost->$k = $v;
