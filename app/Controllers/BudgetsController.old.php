@@ -78,5 +78,7 @@ class BudgetsController
     {
         $this->budMod->add();
     }
+
+    // Un commentaire pour tester gitignore
     
 }
