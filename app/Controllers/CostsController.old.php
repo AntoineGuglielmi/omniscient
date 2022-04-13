@@ -16,15 +16,16 @@ class CostsController
         $this->model('costsModel','cosMod');
     }
 
-    public function delete_costs_by_budget_id($budgetId)
+    public function get_all_by_budgetId($budgetId)
     {
-        $costs = $this->cosMod->jds->delete([
+        $costs = $this->cosMod->jds->select([
             't' => 'costs',
             'w' => function($c) use($budgetId)
             {
                 return (int)$c->budgets_id === (int)$budgetId;
             }
         ]);
+        $this->api($costs);
     }
     
 }
