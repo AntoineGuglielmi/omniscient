@@ -25,7 +25,6 @@ class CostsController
                 return (int)$c->budgets_id === (int)$budgetId;
             }
         ]);
-        
     }
     
 }
