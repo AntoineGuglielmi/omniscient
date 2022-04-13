@@ -27,6 +27,17 @@ class CostsController
         ]);
     }
 
+    public function delete_cost($costId)
+    {
+        $this->cosMod->jds->delete([
+            't' => 'costs',
+            'w' => function($c) use($costId)
+            {
+                return (int)$c->id === (int)$costId;
+            }
+        ]);
+    }
+
     public function create_cost()
     {
         $this->cosMod->create_cost();

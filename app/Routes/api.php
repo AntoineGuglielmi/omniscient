@@ -70,6 +70,9 @@ $api->get('/nav-links')
 $api->delete('/budgets/([0-9]+)')
     ->callback(['BudgetsController::delete_budget']);
 
+$api->delete('/costs/([0-9]+)')
+    ->callback(['CostsController::delete_cost']);
+
 $api->delete('/costs/budget/([0-9]+)')
     ->callback(['CostsController::delete_costs_by_budget_id']);
 
