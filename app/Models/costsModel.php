@@ -56,7 +56,10 @@ class costsModel
       {
         $cost->$k = $v;
       }
-      $this->jds->insert($this->table,$cost);
+      echo '<pre>';
+      var_dump($cost);
+      echo '</pre>';
+      // $this->jds->insert($this->table,$cost);
     }
 
 }
