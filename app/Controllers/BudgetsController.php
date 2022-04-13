@@ -28,7 +28,8 @@ class BudgetsController
                     'w' => function($c) use($b)
                     {
                         return (int)$c->budgets_id === (int)$b->id;
-                    }
+                    },
+                    'o' => [$b->sort_costs]
                 ]);
             }
         ];
