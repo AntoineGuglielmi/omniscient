@@ -8,13 +8,13 @@
         },
         {
             "id": 2,
-            "href": "/budgets",
-            "google_icon": "account_balance_wallet"
+            "href": "/epargne",
+            "google_icon": "euro"
         },
         {
             "id": 3,
-            "href": "/epargne",
-            "google_icon": "euro"
+            "href": "/budgets",
+            "google_icon": "account_balance_wallet"
         }
     ]
 }
