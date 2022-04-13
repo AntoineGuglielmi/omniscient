@@ -82,3 +82,6 @@ $api->put('/budgets/([0-9]+)')
 
 $api->post('/budgets')
     ->callback(['BudgetsController::create_budgets']);
+
+$api->post('/costs')
+    ->callback(['CostsController::create_cost']);

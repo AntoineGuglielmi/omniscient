@@ -49,4 +49,14 @@ class costsModel
       $this->jds->insert($this->table,$cost);
     }
 
+    public function create_cost()
+    {
+      $cost = new \stdClass();
+      foreach($_POST as $k => $v)
+      {
+        $cost->$k = $v;
+      }
+      $this->jds->insert($this->table,$cost);
+    }
+
 }

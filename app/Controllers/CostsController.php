@@ -26,5 +26,10 @@ class CostsController
             }
         ]);
     }
+
+    public function create_cost()
+    {
+        $this->cosMod->create_cost();
+    }
     
 }
