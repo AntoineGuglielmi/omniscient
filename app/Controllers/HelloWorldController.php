@@ -22,5 +22,10 @@ class HelloWorldController
         echo '</pre>';
         
     }
+
+    // public function get_table($table)
+    // {
+        
+    // }
     
 }
