@@ -11,14 +11,14 @@
     {
       "name": "Épargne mensuelle",
       "amount": 100,
-      "budgets_id": 12,
+      "budgets_id": 2,
       "id": 2,
       "created_at": 1649918747
     },
     {
       "name": "Salaire avril",
       "amount": 1700,
-      "budgets_id": 4,
+      "budgets_id": 3,
       "id": 3,
       "created_at": 1649918780
     }
